@@ -1,9 +1,8 @@
 import pytest
-
 import numpy as np
 from scipy.stats import special_ortho_group
 
-from utils.trust_region import solve_tr_subproblem
+from ludfo.utils.trust_region import solve_tr_subproblem
 
 def test_tr_zeros():
     dim = 3

@@ -1,4 +1,4 @@
-from utils.basis import get_quadratic_basis_dim
+from ludfo.utils.basis import get_quadratic_basis_dim
 
 
 def test_basis_dim_2():

@@ -1,16 +1,13 @@
 
 from typing import Any
 import numpy as np
-
 import logging
-
 from dataclasses import dataclass
-from model.history import IndexedEvaluation
 
-from utils.trust_region import solve_tr_subproblem
-
-from utils.basis import get_quadratic_basis_dim
-from utils.basis import construct_vandermonde
+from ludfo.model.history import IndexedEvaluation
+from ludfo.utils.tr_subproblem import solve_tr_subproblem
+from ludfo.utils.basis import get_quadratic_basis_dim
+from ludfo.utils.basis import construct_vandermonde
 
 
 @dataclass
@@ -94,33 +91,31 @@ class Certification:
 
 
 def _test_v(c):
-    pass
-    # V = MultiIndex.construct_vandermonde(c.params.basis, c.get_shifted_points())
-    # lambdas = c.polys
-    # reduced = c.values
-    # ratio = np.linalg.norm(V@lambdas.T - reduced) / np.linalg.norm(reduced)
-    # if ratio > 1e-10:
-    #     print("TODO: The error here should not be so big...")
-    # assert ratio < 1e-2, 'Failure to maintain structure of V: ' + str(ratio)
+    V = MultiIndex.construct_vandermonde(c.params.basis, c.get_shifted_points())
+    lambdas = c.polys
+    reduced = c.values
+    ratio = np.linalg.norm(V@lambdas.T - reduced) / np.linalg.norm(reduced)
+    if ratio > 1e-10:
+        print("TODO: The error here should not be so big...")
+    assert ratio < 1e-2, 'Failure to maintain structure of V: ' + str(ratio)
 
 
 def _find_replacement(c, coef, params, name):
-    pass
-    # poly = Polynomial.construct_polynomial(params.basis, coef)
-    # quad = poly.to_matrix_form()
-    # success, ppoint, _ = solve_tr_subproblem(quad.g, 2 * quad.Q)
-    # assert success, 'Unable to optimize lagrange polynomial'
+    poly = Polynomial.construct_polynomial(params.basis, coef)
+    quad = poly.to_matrix_form()
+    success, ppoint, _ = solve_tr_subproblem(quad.g, 2 * quad.Q)
+    assert success, 'Unable to optimize lagrange polynomial'
 
-    # success, npoint, _ = solve_tr_subproblem(-quad.g, -2 * quad.Q)
-    # assert success, 'Unable to optimize lagrange negative polynomial'
+    success, npoint, _ = solve_tr_subproblem(-quad.g, -2 * quad.Q)
+    assert success, 'Unable to optimize lagrange negative polynomial'
 
-    # pval = quad.evaluate(ppoint)
-    # nval = quad.evaluate(npoint)
+    pval = quad.evaluate(ppoint)
+    nval = quad.evaluate(npoint)
 
     # if params.plot_maximizations:
     #     p = params.plotter.create_plot(
     #         'lagrange_maximization_' + name,
-    #         Bounds.create([-1.2, -1.2], [1.2, 1.2]),
+    #          Bounds.create([-1.2, -1.2], [1.2, 1.2]),
     #         str(poly),
     #         subfolder='lagrange')
     #     p.add_point(npoint, label='negative minimizer', s=50, color='red')
@@ -129,13 +124,10 @@ def _find_replacement(c, coef, params, name):
     #     p.add_circle(center=np.zeros_like(ppoint), radius=1, label='trust region')
     #     p.save()
 
-    # if abs(nval) > abs(pval):
-    #     return npoint, nval
-    # else:
-    #     return ppoint, pval
-
-    # params.logger.log_message("Maximum absolute value of " + str(poly) + " over tr is " + str(mval))
-    # return mpoint, mval
+    if abs(nval) > abs(pval):
+        return npoint, nval
+    else:
+        return ppoint, pval
 
 
 def _swap_rows(c, i1, i2):

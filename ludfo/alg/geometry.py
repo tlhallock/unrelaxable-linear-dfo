@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from alg.state import State
+from ludfo.alg.state import State
 
-from alg.model import Model
+from ludfo.alg.model import Model
 
 
 @dataclass

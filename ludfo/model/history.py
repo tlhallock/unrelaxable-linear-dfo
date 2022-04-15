@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 import numpy as np
 
-from model.bounds import Bounds
-from model.evaluation import Evaluation
+from ludfo.model.bounds import Bounds
+from ludfo.model.evaluation import Evaluation
 
 
 @dataclass

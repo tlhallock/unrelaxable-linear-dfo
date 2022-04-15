@@ -1,7 +1,7 @@
 from dataclasses import dataclass
-from alg.geometry import PoisednessCertification
 
-from alg.state import State
+from ludfo.alg.geometry import PoisednessCertification
+from ludfo.alg.state import State
 
 
 

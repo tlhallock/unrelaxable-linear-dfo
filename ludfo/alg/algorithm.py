@@ -1,10 +1,10 @@
 import logging
 
-from alg.state import State
-from alg.criticality import check_criticality
-from alg.geometry import improve_geometry
-from alg.model import udpate_model
-from alg.run_result import IterationResult, RunResult
+from ludfo.alg.state import State
+from ludfo.alg.criticality import check_criticality
+from ludfo.alg.geometry import improve_geometry
+from ludfo.alg.model import udpate_model
+from ludfo.alg.run_result import IterationResult, RunResult
 
 # def begin_iteration(state):
 # 	state.logger.start_step('iteration ' + str(state.iteration))

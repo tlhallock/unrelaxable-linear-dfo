@@ -1,10 +1,10 @@
 import numpy as np
-from model.ellipsoid import Ellipsoid
+from ludfo.model.ellipsoid import Ellipsoid
 
-from model.evaluation import Evaluation
-from model.history import IndexedEvaluation
+from ludfo.model.evaluation import Evaluation
+from ludfo.model.history import IndexedEvaluation
 
-from utils.lagrange import (
+from ludfo.utils.lagrange import (
     LagrangeParams,
     perform_lu_factorization,
 )

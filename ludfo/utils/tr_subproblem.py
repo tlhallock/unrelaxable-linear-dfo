@@ -1,9 +1,8 @@
 import numpy as np
 from dataclasses import dataclass
-
 import logging
 
-from cfg import Cfg
+from ludfo.cfg import Cfg
 
 '''
 Problem:
