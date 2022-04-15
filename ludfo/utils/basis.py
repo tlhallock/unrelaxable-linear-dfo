@@ -39,10 +39,9 @@ def _get_idx_cache(dim: int) -> np.ndarray:
 
 
 def coef_to_matrix(dim, coef):
-    c = ceof[0]
-    g = ceof[1:(1+dim)]
-    q = np.take(coef, _get_idx_cache) * np.diag([2.0] * dim)
-
+    c = coef[0]
+    g = coef[1:(1+dim)]
+    q = np.take(coef, _get_idx_cache(dim)) * np.diag([2.0] * dim)
 
 
 
